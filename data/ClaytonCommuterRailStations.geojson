@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "ClaytonCommuterRailStations",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0, "Name": "Mountain View" }, "geometry": { "type": "Point", "coordinates": [ -84.390502000071663, 33.638270453929039 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Name": "Hapeville" }, "geometry": { "type": "Point", "coordinates": [ -84.410665795045944, 33.659663585247699 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Name": "Forest Park" }, "geometry": { "type": "Point", "coordinates": [ -84.364515810742176, 33.620423592600915 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Name": "Clayton State University" }, "geometry": { "type": "Point", "coordinates": [ -84.335814233703204, 33.593168521810284 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Name": "Southlake Mobility Hub" }, "geometry": { "type": "Point", "coordinates": [ -84.341985347235294, 33.572616873925405 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Name": "Jonesboro" }, "geometry": { "type": "Point", "coordinates": [ -84.34959845139025, 33.509494793815044 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Name": "Lovejoy" }, "geometry": { "type": "Point", "coordinates": [ -84.309985835826453, 33.434253630390664 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Name": "East Point" }, "geometry": { "type": "Point", "coordinates": [ -84.438912523127328, 33.67638173105464 ] } }
+]
+}

@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "RiverdaleBRT_MajorStations",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::2240" } },
+"features": [
+{ "type": "Feature", "properties": { "STATION": "East Point", "Stn_Code": "S5" }, "geometry": { "type": "Point", "coordinates": [ 2213353.962104190606624, 1337690.629315705038607 ] } },
+{ "type": "Feature", "properties": { "STATION": "College Park", "Stn_Code": "S6" }, "geometry": { "type": "Point", "coordinates": [ 2210730.086269547697157, 1328379.692225257633254 ] } },
+{ "type": "Feature", "properties": { "STATION": "Justice Center Mobility Hub", "Stn_Code": null }, "geometry": { "type": "Point", "coordinates": [ 2237943.414707560092211, 1275508.652108107926324 ] } },
+{ "type": "Feature", "properties": { "STATION": "Riverdale Park-and-Ride", "Stn_Code": null }, "geometry": { "type": "Point", "coordinates": [ 2223766.206730352248996, 1297539.421338876942173 ] } },
+{ "type": "Feature", "properties": { "STATION": "Southlake Mobility Hub", "Stn_Code": null }, "geometry": { "type": "Point", "coordinates": [ 2243185.066015285905451, 1299595.465696239145473 ] } }
+]
+}

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Riverdale BRT</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+  <style>
+  </style>
+</head>
+
+<body>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css" />
+  <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    img {
+      max-width: 150px;
+    }
+
+    .geocoder-dropdown-item {
+      padding: 5px;
+    }
+
+    .geocoder-dropdown-icon {
+      margin-right: 10px;
+    }
+
+    .geocoder-dropdown-text {
+      color: #5a3fc0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: larger;
+    }
+
+    .mapboxgl-popup {
+      max-width: 600px;
+      min-width: 350px;
+      max-height: 300px;
+      font: 14px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+      overflow-y: scroll;
+      overflow-x: scroll;
+      overflow: scroll;
+      z-index: 10;
+      border: 0px solid rgba(0, 79, 150, 0.9);
+    }
+
+    .mapboxgl-popup-content {
+      overflow: scroll;
+      background-color: rgba(250, 250, 250, 0.9);
+      font: 14px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+      color: #2f3234;
+
+    }
+    a {
+      color: #ee404a;
+    }
+    .leftPop {
+      float: left;
+      width: 50%;
+    }
+
+    .rightPop {
+      float: right;
+      width: 50%;
+    }
+
+    .mapboxgl-ctrl-geocoder {
+      min-width: 285px;
+    }
+
+    #toggle {
+      background: #fff;
+      position: relative;
+      z-index: 3;
+      top: 0px;
+      left: 20px;
+      bottom: 20px;
+      border-radius: 3px;
+      width: 75%;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      font-family: 'Roboto', sans-serif;
+      margin-bottom: 20px;
+    }
+
+    #toggle a {
+      font-size: 13px;
+      color: #404040;
+      display: block;
+      margin: 0;
+      padding: 0;
+      padding: 10px;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+      text-align: center;
+    }
+    #toggle a.1 {
+      background-color: yellow;
+    }
+
+    #toggle a:last-child {
+      border: none;
+    }
+
+    #toggle a:hover {
+      background-color: #f8f8f8;
+      color: #404040;
+    }
+
+    #toggle a.active {
+      background-color: #088ccc;
+      color: #ffffff;
+    }
+
+    #toggle a.active:hover {
+      background: #ffb500;
+    }
+    #toggle-container {
+      background: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      z-index: 1;
+      top: 10px;
+      left: 20px;
+      border-top: 20px;
+      border-radius: 3px;
+      width: 220px;
+      border: 1px solid rgba(0, 0, 0, 0.0);
+      font-family: 'Helvetica', sans-serif;
+      color: white;
+    }
+    #feature-filter {
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      top: 40px;
+      /* left: 40px; */
+      border-top: 20px;
+      border-radius: 3px;
+      min-height: 30px;
+      /* width: 220px; */
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-family: 'Helvetica', sans-serif;
+      color: white;
+    }
+    #sideNav  {
+      -webkit-column-width: 240px;
+      -moz-column-width: 240px;
+      column-width: 240px;
+      width: 260px;
+      border-color: red;
+      display: flex;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+fieldset {
+  border-width: 0px;
+}
+  </style>
+  <!-- <div class="nav">
+    <h2>ATL Disrticts Map</h2>
+  </div> -->
+
+  <div id="map-container">
+    <div id="map">
+    <div id="sideNav">
+    <div id="toggle-container">
+      <h3 style="padding: 0 25px">Use the buttons below to toggle the layers on and off</h3>
+       <nav id="toggle"> </nav>
+      <!-- <h3 style="padding: 0 10px">Filter by Project Sponsor</h3>
+       <fieldset>
+        <input
+        id="feature-filter"
+        style="padding: 0 10px"
+        type="text"
+        placeholder="Enter a Project Sponsor"
+        />
+        </fieldset>
+        <div id="feature-listing" class="listing"></div> -->
+    </div>
+    </div>
+  </div>
+</div>
+
+  <!-- <div class="footer">
+
+  </div> -->
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGNhY2VkYSIsImEiOiIzNmM4MGRlN2I4NDhiY2UxZjA4MmJjZjE5OWEzYjUzNSJ9.Wc5KTJpWxmpxVMZfcuEQNg';
+
+    var layerIDs = []; // Will contain a list used to filter against.
+    var filterInput = document.getElementById('feature-filter');
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      // style: 'mapbox://styles/mapbox/streets-v9',
+      center: [-84.391103, 33.752390],
+      zoom: 8.5
+    });
+
+    var projectSponsors = [];
+    var filterEl = document.getElementById('feature-filter');
+    var listinEl = document.getElementById('feature-listing');
+
+    //<!--POLYGON LAYER-- >
+    map.on('load', function() {
+      map.addSource('Existing MARTA', {
+        'type': 'geojson',
+        'data': 'data/Existing_MARTA_Transit.geojson'
+      });
+
+      //Add polygon LAYER
+      map.addLayer({
+        'id': 'Existing MARTA',
+        'type': 'line',
+        'source': 'Existing MARTA',
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': 'rgba(255, 0, 0, 1)',
+          'line-width': 3
+        }
+      });
+    });
+
+// <!--Supportive Infra LINES LAYER-- >
+    map.on('load', function() {
+      map.addSource('SI corridors', {
+        'type': 'geojson',
+        'data': 'Supportive_Infra_Corridor_Projects_colors.geojson'
+      });
+
+      //Add Lines LAYER
+      map.addLayer({
+        'id': 'Supportive Infrastructure Corridor Projects',
+        'type': 'line',
+        'source': 'SI corridors',
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          // 'line-color': 'rgba(0, 169, 144, 0.6)',
+          // 'line-color': 'rgba(95, 179, 228, 0.6)',
+          'line-width': 2.85,
+          'line-opacity': 0.8,
+          // 'fill-outline-color': 'rgba(158, 95, 166, 1)'
+          'line-color': {
+            'property': 'color',
+            'type': 'identity'
+          },
+          'line-offset': {
+            'property': 'Project_ID',
+            'type': 'categorical',
+            stops: [
+              [1, 0],
+              [2, 3],
+              [3, 6],
+              [6, 9]
+            ]
+          }
+        }
+      });
+
+    });
+// <!--BUS LINES LAYER-- >
+          map.on('load', function() {
+            map.addSource('bus corridors', {
+              'type': 'geojson',
+              'data': 'Local Bus Projects.geojson'
+            });
+
+            //Add Lines LAYER
+            map.addLayer({
+              'id': 'Local Service Projects',
+              'type': 'line',
+              'source': 'bus corridors',
+              'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+              },
+              'paint': {
+                // 'line-color': 'rgba(0, 79, 150, 0.6)',
+                'line-width': 2.85,
+                'line-opacity': 0.8,
+                // 'fill-outline-color': 'rgba(158, 95, 166, 1)'
+                'line-color': {
+                  'property': 'color',
+                  'type': 'identity'
+                },
+                'line-offset': {
+                  'property': 'Project_ID',
+                  'type': 'categorical',
+                  stops: [
+                    [1, 0],
+                    [2, 3],
+                    [3, 6],
+                    [6, 9]
+                  ]
+                }
+              }
+            });
+          });
+
+// <!--Other LINES LAYER-- >
+      map.on('load', function() {
+        map.addSource('High corridors', {
+          'type': 'geojson',
+          'data': 'High_Capacity_Corridor_Projects_Color.geojson'
+        });
+
+        //Add Lines LAYER
+        map.addLayer({
+          'id': 'High Capacity Service Projects',
+          'type': 'line',
+          'source': 'High corridors',
+          'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          'paint': {
+            // 'line-color': 'rgba(245, 127, 52, 0.6)',
+            'line-width': 2.85,
+            'line-opacity': 0.8,
+            // 'line-outline-color': 'rgba(0, 0, 0, 1)'
+            'line-color': {
+              'property': 'color',
+              'type': 'identity'
+            },
+            'line-offset': {
+              'property': 'Project_ID',
+              'type': 'categorical',
+              stops: [
+                [1, 0],
+                [2, 3],
+                [3, 6]
+              ]
+            }
+          }
+        });
+      });
+
+// <!--POINTS LAYER-- >
+    map.on('load', function() {
+      map.addSource('points', {
+        'type': 'geojson',
+        'data': 'ARTP_2020_points.geojson'
+      });
+
+      //Add Lines LAYER
+      map.addLayer({
+        'id': 'Supportive Infrastructure Point Projects',
+        'type': 'circle',
+        'source': 'points',
+        'layout': {
+          // 'line-join': 'round',
+          // 'line-cap': 'round'
+        },
+        'paint': {
+          'circle-color': 'rgba(253, 183, 20, .9)',
+          'circle-stroke-color': 'rgba(253, 183, 20, 1)',
+          'circle-stroke-opacity': 1,
+          'circle-stroke-width': 2,
+          'circle-radius': 7
+        }
+      });
+    });
+//<!--DISTRICT LAYER-- >
+    map.on('load', function() {
+      // Add a source for the state polygons.
+      map.addSource('districts', {
+        'type': 'geojson',
+        'data': 'ATL_Districts.geojson'
+      });
+
+      // Add a layer showing the state polygons.
+      map.addLayer({
+        'id': 'districts-layer',
+        'type': 'fill',
+        'source': 'districts',
+        'paint': {
+          'fill-color': 'rgba(15, 95, 166, 0)',
+          // 'fill-outline-color': 'rgba(158, 95, 166, 1)'
+        }
+      });
+
+      map.addLayer({
+        id: 'districtName',
+        type: 'symbol',
+        source: 'districts',
+        layout: {
+          'text-field': 'District {TArea_ID}\n',
+          // 'text-font': ['Droid Sans Regular'],
+          'text-size': 20,
+          'symbol-placement': 'point'
+        },
+        paint: {
+          'text-color': ['case',
+            ['boolean', ['feature-state', 'hover'], false],
+            'rgba(158,95,166,0.75)',
+            'rgba(158,95,166,1)'
+          ],
+          'text-halo-color': ['case',
+            ['boolean', ['feature-state', 'hover'], false],
+            'rgba(158,95,166,0.75)',
+            'rgba(158,95,166,1)'
+          ],
+          'text-halo-width': 1,
+          'text-halo-blur': 0,
+        }
+      });
+
+
+
+      // When a click event occurs on a feature in the districts layer, open a popup at the
+      // location of the click, with description HTML from its properties.
+      map.on('click', 'districts-layer', function(e) {
+        // new mapboxgl.Popup()
+        //   .setLngLat(e.lngLat)
+        //   // .setHTML(e.features[0].properties.Title)
+        //   .setHTML('<div class="leftPop">'+'<h2>' + 'ATL District' + ' ' + e.features[0].properties.TArea_ID + '</h2>' +  ' ' +'<h3>' + e.features[0].properties.name + '</h3>' +
+        //   "<img src='" + e.features[0].properties.img + "'>"+ '</div>' +
+        //   '<div class="rightPop">'+ '<p>' + e.features[0].properties.quote1 + '</p>'+ ' ' + '<p>' + e.features[0].properties.quote2 + '</p>' + '</div>')
+        //   .addTo(map);
+      });
+
+      // Change the cursor to a pointer when the mouse is over the districts layer.
+      map.on('mouseenter', 'districts-layer', function() {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      // Change it back to a pointer when it leaves.
+      map.on('mouseleave', 'districts-layer', function() {
+        map.getCanvas().style.cursor = '';
+      });
+    });
+
+    map.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        zoom: 11,
+        placeholder: 'Search for an address or place',
+        mapboxgl: mapboxgl
+      })
+    );
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl());
+    // Add full screen control to the map.
+    map.addControl(new mapboxgl.FullscreenControl());
+
+    // enumerate ids of the layers
+    var toggleableLayerIds = [ 'Existing MARTA', 'Large Area Projects', 'Local Service Projects', 'Supportive Infrastructure Corridor Projects', 'Supportive Infrastructure Point Projects'];
+
+
+// set up the corresponding toggle button for each layer
+    for (var i = 0; i < toggleableLayerIds.length; i++) {
+      var id=toggleableLayerIds[i];
+      var link=document.createElement('a'); link.href='#' ; link.className='active' ;
+      link.textContent=id;
+
+      link.onclick=function (e) {
+        var clickedLayer=this.textContent;
+        e.preventDefault(); e.stopPropagation();
+
+
+        var visibility=map.getLayoutProperty(clickedLayer, 'visibility' );
+// toggle layer visibility by changing the layout object's visibility property
+        if (visibility==='visible' ) {
+          map.setLayoutProperty(clickedLayer, 'visibility' , 'none' ); this.className='' ; } else { this.className='active' ; map.setLayoutProperty(clickedLayer, 'visibility' , 'visible' ); } }; var layers=document.getElementById('toggle'); layers.appendChild(link); }
+
+// ********** PopUps for POINTS Layer **********
+      map.on('click', 'Supportive Infrastructure Point Projects', function(e) {
+            new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(
+              "<strong>Project Sponsor: </strong>"+ e.features[0].properties.Project_Sponsor + "<br />"
+              + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
+              + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
+              + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
+              + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
+              + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
+              + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+            .addTo(map);
+            // listingEl.appendChild(item);
+
+         });
+
+// ********** PopUps for POLYGON Layer **********
+   map.on('click', 'Large Area Projects', function(e) {
+         new mapboxgl.Popup()
+         .setLngLat(e.lngLat)
+         .setHTML(
+           "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
+           + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
+           + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
+           + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
+           + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
+           + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
+           + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+         .addTo(map);
+         // listingEl.appendChild(item);
+
+      });
+
+//********* Popups for Supportive Infra Lines Layer ******
+
+    map.on('click', 'Supportive Infrastructure Corridor Projects', function(e) {
+        new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(
+          "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
+          + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
+          + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
+          + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
+          + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
+          + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
+          + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+        .addTo(map);
+        // listingEl.appendChild(item);
+
+     });
+
+//********* Popups for Supportive Infra Lines Layer ******
+
+    map.on('click', 'Local Service Projects', function(e) {
+        new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(
+        "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
+        + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
+        + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
+        + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
+        + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
+        + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
+        + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+        .addTo(map);
+        // listingEl.appendChild(item);
+      });
+
+//********* Popups for Rail Lines Layer ******
+
+    map.on('click', 'High Capacity Service Projects', function(e) {
+        new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(
+        "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
+        + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
+        + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
+        + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
+        + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
+        + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
+        + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+        .addTo(map);
+        // listingEl.appendChild(item);
+      });
+
+//********* Popups for Rail Lines Layer ******
+
+    map.on('click', 'Other Line Projects', function(e) {
+        new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(
+        "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
+        + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
+        + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
+        + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
+        + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
+        + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
+        + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+        .addTo(map);
+        // listingEl.appendChild(item);
+      });
+
+
+
+  </script>
+
+</body>
+
+</html>
