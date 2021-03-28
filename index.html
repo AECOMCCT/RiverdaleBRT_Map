@@ -407,7 +407,7 @@ fieldset {
         'data': 'data/Riverdale_Stations_17.geojson'
       });
 
-      //Add Lines LAYER
+//Add POINTS LAYER
       map.addLayer({
         'id': 'Riverdale Staions',
         'type': 'circle',
@@ -425,75 +425,100 @@ fieldset {
         }
       });
     });
-//<!--DISTRICT LAYER-- >
+
+// <!--POINTS LAYERS-- >
     map.on('load', function() {
-      // Add a source for the state polygons.
-      map.addSource('districts', {
+      map.addSource('Major Stations', {
         'type': 'geojson',
-        'data': ''
+        'data': 'data/RiverdaleBRT_MajorStations.geojson'
       });
-
-      // Add a layer showing the state polygons.
+//Add POINTS LAYER
       map.addLayer({
-        'id': 'districts-layer',
-        'type': 'fill',
-        'source': 'districts',
-        'paint': {
-          'fill-color': 'rgba(15, 95, 166, 0)',
-          // 'fill-outline-color': 'rgba(158, 95, 166, 1)'
-        }
-      });
-
-      map.addLayer({
-        id: 'districtName',
-        type: 'symbol',
-        source: 'districts',
-        layout: {
-          'text-field': 'District {TArea_ID}\n',
-          // 'text-font': ['Droid Sans Regular'],
-          'text-size': 20,
-          'symbol-placement': 'point'
+        'id': 'Riverdale Major Staions',
+        'type': 'circle',
+        'source': 'Major Stations',
+        'layout': {
+          // 'line-join': 'round',
+          // 'line-cap': 'round'
         },
-        paint: {
-          'text-color': ['case',
-            ['boolean', ['feature-state', 'hover'], false],
-            'rgba(158,95,166,0.75)',
-            'rgba(158,95,166,1)'
-          ],
-          'text-halo-color': ['case',
-            ['boolean', ['feature-state', 'hover'], false],
-            'rgba(158,95,166,0.75)',
-            'rgba(158,95,166,1)'
-          ],
-          'text-halo-width': 1,
-          'text-halo-blur': 0,
+        'paint': {
+          'circle-color': 'rgba(250, 250, 250, 0.9)',
+          'circle-stroke-color': 'rgba(250, 250, 250, 1)',
+          'circle-stroke-opacity': 1,
+          'circle-stroke-width': 2,
+          'circle-radius': 7
         }
-      });
-
-
-
-      // When a click event occurs on a feature in the districts layer, open a popup at the
-      // location of the click, with description HTML from its properties.
-      map.on('click', 'districts-layer', function(e) {
-        // new mapboxgl.Popup()
-        //   .setLngLat(e.lngLat)
-        //   // .setHTML(e.features[0].properties.Title)
-        //   .setHTML('<div class="leftPop">'+'<h2>' + 'ATL District' + ' ' + e.features[0].properties.TArea_ID + '</h2>' +  ' ' +'<h3>' + e.features[0].properties.name + '</h3>' +
-        //   "<img src='" + e.features[0].properties.img + "'>"+ '</div>' +
-        //   '<div class="rightPop">'+ '<p>' + e.features[0].properties.quote1 + '</p>'+ ' ' + '<p>' + e.features[0].properties.quote2 + '</p>' + '</div>')
-        //   .addTo(map);
-      });
-
-      // Change the cursor to a pointer when the mouse is over the districts layer.
-      map.on('mouseenter', 'districts-layer', function() {
-        map.getCanvas().style.cursor = 'pointer';
-      });
-
-      // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'districts-layer', function() {
-        map.getCanvas().style.cursor = '';
       });
     });
+// //<!--DISTRICT LAYER-- >
+//     map.on('load', function() {
+//       // Add a source for the state polygons.
+//       map.addSource('districts', {
+//         'type': 'geojson',
+//         'data': ''
+//       });
+//
+//       // Add a layer showing the state polygons.
+//       map.addLayer({
+//         'id': 'districts-layer',
+//         'type': 'fill',
+//         'source': 'districts',
+//         'paint': {
+//           'fill-color': 'rgba(15, 95, 166, 0)',
+//           // 'fill-outline-color': 'rgba(158, 95, 166, 1)'
+//         }
+//       });
+//
+//       map.addLayer({
+//         id: 'districtName',
+//         type: 'symbol',
+//         source: 'districts',
+//         layout: {
+//           'text-field': 'District {TArea_ID}\n',
+//           // 'text-font': ['Droid Sans Regular'],
+//           'text-size': 20,
+//           'symbol-placement': 'point'
+//         },
+//         paint: {
+//           'text-color': ['case',
+//             ['boolean', ['feature-state', 'hover'], false],
+//             'rgba(158,95,166,0.75)',
+//             'rgba(158,95,166,1)'
+//           ],
+//           'text-halo-color': ['case',
+//             ['boolean', ['feature-state', 'hover'], false],
+//             'rgba(158,95,166,0.75)',
+//             'rgba(158,95,166,1)'
+//           ],
+//           'text-halo-width': 1,
+//           'text-halo-blur': 0,
+//         }
+//       });
+//
+//
+//
+//       // When a click event occurs on a feature in the districts layer, open a popup at the
+//       // location of the click, with description HTML from its properties.
+//       map.on('click', 'districts-layer', function(e) {
+//         // new mapboxgl.Popup()
+//         //   .setLngLat(e.lngLat)
+//         //   // .setHTML(e.features[0].properties.Title)
+//         //   .setHTML('<div class="leftPop">'+'<h2>' + 'ATL District' + ' ' + e.features[0].properties.TArea_ID + '</h2>' +  ' ' +'<h3>' + e.features[0].properties.name + '</h3>' +
+//         //   "<img src='" + e.features[0].properties.img + "'>"+ '</div>' +
+//         //   '<div class="rightPop">'+ '<p>' + e.features[0].properties.quote1 + '</p>'+ ' ' + '<p>' + e.features[0].properties.quote2 + '</p>' + '</div>')
+//         //   .addTo(map);
+//       });
+//
+//       // Change the cursor to a pointer when the mouse is over the districts layer.
+//       map.on('mouseenter', 'districts-layer', function() {
+//         map.getCanvas().style.cursor = 'pointer';
+//       });
+//
+//       // Change it back to a pointer when it leaves.
+//       map.on('mouseleave', 'districts-layer', function() {
+//         map.getCanvas().style.cursor = '';
+//       });
+//     });
 
     map.addControl(
       new MapboxGeocoder({
@@ -509,7 +534,7 @@ fieldset {
     map.addControl(new mapboxgl.FullscreenControl());
 
     // enumerate ids of the layers
-    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Riverdale BRT Phase 1', 'Riverdale BRT Phase 2', 'Riverdale Staions', 'More layers coming soon'];
+    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Riverdale BRT Phase 1', 'Riverdale BRT Phase 2', 'Riverdale Staions', 'Riverdale Major Staions','More layers coming soon'];
 
 
 // set up the corresponding toggle button for each layer
