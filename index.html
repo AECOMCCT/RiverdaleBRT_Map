@@ -87,7 +87,7 @@
       min-width: 285px;
     }
 
-    #toggle {
+    #menu {
       background: #fff;
       position: relative;
       z-index: 3;
@@ -101,7 +101,7 @@
       margin-bottom: 20px;
     }
 
-    #toggle a {
+    #menu a {
       font-size: 13px;
       color: #404040;
       display: block;
@@ -112,28 +112,28 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.25);
       text-align: center;
     }
-    #toggle a.1 {
+    #menu a.1 {
       background-color: yellow;
     }
 
-    #toggle a:last-child {
+    #menu a:last-child {
       border: none;
     }
 
-    #toggle a:hover {
+    #menu a:hover {
       background-color: #f8f8f8;
       color: #404040;
     }
 
-    #toggle a.active {
+    #menu a.active {
       background-color: #088ccc;
       color: #ffffff;
     }
 
-    #toggle a.active:hover {
+    #menu a.active:hover {
       background: #ffb500;
     }
-    #toggle-container {
+    #menu-container {
       background: rgba(0, 0, 0, 0.5);
       position: absolute;
       z-index: 1;
@@ -185,9 +185,9 @@ fieldset {
   <div id="map-container">
     <div id="map">
     <div id="sideNav">
-    <div id="toggle-container">
-      <h3 style="padding: 0 25px">Use the buttons below to toggle the layers on and off</h3>
-       <nav id="toggle"> </nav>
+    <div id="menu-container">
+      <h3 style="padding: 0 25px">Use the buttons below to menu the layers on and off</h3>
+       <nav id="menu"> </nav>
       <!-- <h3 style="padding: 0 10px">Filter by Project Sponsor</h3>
        <fieldset>
         <input
@@ -236,6 +236,7 @@ fieldset {
         'type': 'line',
         'source': 'Existing MARTA Gold Line',
         'layout': {
+          'visibility': 'visible',
           'line-join': 'round',
           'line-cap': 'round'
         },
@@ -259,6 +260,7 @@ fieldset {
         'type': 'line',
         'source': 'Existing MARTA Red Line',
         'layout': {
+          'visibility': 'visible',
           'line-join': 'round',
           'line-cap': 'round'
         },
@@ -283,6 +285,7 @@ fieldset {
       'type': 'line',
       'source': 'Clayton Commuter Rail',
       'layout': {
+        'visibility': 'none',
         'line-join': 'round',
         'line-cap': 'round'
       },
@@ -293,28 +296,6 @@ fieldset {
     });
   });
 
-// // <!--Existing Bus Routes-- >
-//     map.on('load', function() {
-//       map.addSource('Existing Bus Route 194', {
-//         'type': 'geojson',
-//         'data': 'data/ClaytonBusRoutes_194.geojson'
-//       });
-//
-//       //Add polygon LAYER
-//       map.addLayer({
-//         'id': 'Existing Bus Route 194',
-//         'type': 'line',
-//         'source': 'Existing Bus Route 194',
-//         'layout': {
-//           'line-join': 'round',
-//           'line-cap': 'round'
-//         },
-//         'paint': {
-//           'line-color': 'rgba(0, 250, 180, 1)',
-//           'line-width': 3
-//         }
-//       });
-//     });
 
 // <!--Other LINES LAYER-- >
       map.on('load', function() {
@@ -329,6 +310,7 @@ fieldset {
           'type': 'line',
           'source': 'Existing Clayton Bus Routes',
           'layout': {
+            'visibility': 'visible',
             'line-join': 'round',
             'line-cap': 'round'
           },
@@ -368,6 +350,7 @@ fieldset {
               'type': 'line',
               'source': 'Riverdale BRT 2',
               'layout': {
+                'visibility': 'visible',
                 'line-join': 'round',
                 'line-cap': 'round'
               },
@@ -390,6 +373,7 @@ fieldset {
               'type': 'line',
               'source': 'Riverdale BRT 1',
               'layout': {
+                'visibility': 'visible',
                 'line-join': 'round',
                 'line-cap': 'round'
               },
@@ -409,10 +393,11 @@ fieldset {
 
 //Add POINTS LAYER
       map.addLayer({
-        'id': 'Riverdale Staions',
+        'id': 'Riverdale Stations',
         'type': 'circle',
         'source': '17 Stations',
         'layout': {
+          'visibility': 'visible'
           // 'line-join': 'round',
           // 'line-cap': 'round'
         },
@@ -428,97 +413,30 @@ fieldset {
 
 // <!--POINTS LAYERS-- >
     map.on('load', function() {
-      map.addSource('Major Stations', {
+      map.addSource('Riverdale Major Stations', {
         'type': 'geojson',
         'data': 'data/RiverdaleBRT_MajorStations.geojson'
       });
+
 //Add POINTS LAYER
       map.addLayer({
-        'id': 'Riverdale Major Staions',
+        'id': 'Riverdale Major Stations',
         'type': 'circle',
-        'source': 'Major Stations',
+        'source': 'Riverdale Major Stations',
         'layout': {
+          'visibility': 'visible'
           // 'line-join': 'round',
           // 'line-cap': 'round'
         },
         'paint': {
-          'circle-color': 'rgba(250, 250, 250, 0.9)',
+          'circle-color': 'rgba(250, 250, 250, .9)',
           'circle-stroke-color': 'rgba(250, 250, 250, 1)',
           'circle-stroke-opacity': 1,
           'circle-stroke-width': 2,
-          'circle-radius': 7
+          'circle-radius': 7.5
         }
       });
     });
-// //<!--DISTRICT LAYER-- >
-//     map.on('load', function() {
-//       // Add a source for the state polygons.
-//       map.addSource('districts', {
-//         'type': 'geojson',
-//         'data': ''
-//       });
-//
-//       // Add a layer showing the state polygons.
-//       map.addLayer({
-//         'id': 'districts-layer',
-//         'type': 'fill',
-//         'source': 'districts',
-//         'paint': {
-//           'fill-color': 'rgba(15, 95, 166, 0)',
-//           // 'fill-outline-color': 'rgba(158, 95, 166, 1)'
-//         }
-//       });
-//
-//       map.addLayer({
-//         id: 'districtName',
-//         type: 'symbol',
-//         source: 'districts',
-//         layout: {
-//           'text-field': 'District {TArea_ID}\n',
-//           // 'text-font': ['Droid Sans Regular'],
-//           'text-size': 20,
-//           'symbol-placement': 'point'
-//         },
-//         paint: {
-//           'text-color': ['case',
-//             ['boolean', ['feature-state', 'hover'], false],
-//             'rgba(158,95,166,0.75)',
-//             'rgba(158,95,166,1)'
-//           ],
-//           'text-halo-color': ['case',
-//             ['boolean', ['feature-state', 'hover'], false],
-//             'rgba(158,95,166,0.75)',
-//             'rgba(158,95,166,1)'
-//           ],
-//           'text-halo-width': 1,
-//           'text-halo-blur': 0,
-//         }
-//       });
-//
-//
-//
-//       // When a click event occurs on a feature in the districts layer, open a popup at the
-//       // location of the click, with description HTML from its properties.
-//       map.on('click', 'districts-layer', function(e) {
-//         // new mapboxgl.Popup()
-//         //   .setLngLat(e.lngLat)
-//         //   // .setHTML(e.features[0].properties.Title)
-//         //   .setHTML('<div class="leftPop">'+'<h2>' + 'ATL District' + ' ' + e.features[0].properties.TArea_ID + '</h2>' +  ' ' +'<h3>' + e.features[0].properties.name + '</h3>' +
-//         //   "<img src='" + e.features[0].properties.img + "'>"+ '</div>' +
-//         //   '<div class="rightPop">'+ '<p>' + e.features[0].properties.quote1 + '</p>'+ ' ' + '<p>' + e.features[0].properties.quote2 + '</p>' + '</div>')
-//         //   .addTo(map);
-//       });
-//
-//       // Change the cursor to a pointer when the mouse is over the districts layer.
-//       map.on('mouseenter', 'districts-layer', function() {
-//         map.getCanvas().style.cursor = 'pointer';
-//       });
-//
-//       // Change it back to a pointer when it leaves.
-//       map.on('mouseleave', 'districts-layer', function() {
-//         map.getCanvas().style.cursor = '';
-//       });
-//     });
 
     map.addControl(
       new MapboxGeocoder({
@@ -534,7 +452,7 @@ fieldset {
     map.addControl(new mapboxgl.FullscreenControl());
 
     // enumerate ids of the layers
-    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Riverdale BRT Phase 1', 'Riverdale BRT Phase 2', 'Riverdale Staions', 'Riverdale Major Staions','More layers coming soon'];
+    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Riverdale BRT Phase 1', 'Riverdale BRT Phase 2', 'Riverdale Stations', 'Riverdale Major Stations','More layers coming soon'];
 
 
 // set up the corresponding toggle button for each layer
@@ -551,7 +469,15 @@ fieldset {
         var visibility=map.getLayoutProperty(clickedLayer, 'visibility' );
 // toggle layer visibility by changing the layout object's visibility property
         if (visibility==='visible' ) {
-          map.setLayoutProperty(clickedLayer, 'visibility' , 'none' ); this.className='' ; } else { this.className='active' ; map.setLayoutProperty(clickedLayer, 'visibility' , 'visible' ); } }; var layers=document.getElementById('toggle'); layers.appendChild(link); }
+          map.setLayoutProperty(clickedLayer, 'visibility' , 'none' );
+            this.className='' ; }
+            else {
+              this.className='active' ;
+              map.setLayoutProperty(clickedLayer, 'visibility' , 'visible');
+            } };
+            var layers=document.getElementById('menu'); layers.appendChild(link); }
+
+
 
 // ********** PopUps for POINTS Layer **********
       map.on('click', 'Supportive Infrastructure Point Projects', function(e) {
