@@ -241,7 +241,7 @@ fieldset {
         },
         'paint': {
           'line-color': 'rgba(251, 178, 23, 1)',
-          'line-width': 3
+          'line-width': 2
         }
       });
     });
@@ -264,7 +264,7 @@ fieldset {
         },
         'paint': {
           'line-color': 'rgba(255, 0, 0, 1)',
-          'line-width': 3
+          'line-width': 2
         }
       });
     });
@@ -288,33 +288,33 @@ fieldset {
       },
       'paint': {
         'line-color': 'rgba(55, 180, 180, 1)',
-        'line-width': 3
+        'line-width': 2
       }
     });
   });
 
-// <!--Existing Bus Routes-- >
-    map.on('load', function() {
-      map.addSource('Existing Bus Route 194', {
-        'type': 'geojson',
-        'data': 'data/ClaytonBusRoutes_194.geojson'
-      });
-
-      //Add polygon LAYER
-      map.addLayer({
-        'id': 'Existing Bus Route 194',
-        'type': 'line',
-        'source': 'Existing Bus Route 194',
-        'layout': {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
-        'paint': {
-          'line-color': 'rgba(0, 250, 180, 1)',
-          'line-width': 3
-        }
-      });
-    });
+// // <!--Existing Bus Routes-- >
+//     map.on('load', function() {
+//       map.addSource('Existing Bus Route 194', {
+//         'type': 'geojson',
+//         'data': 'data/ClaytonBusRoutes_194.geojson'
+//       });
+//
+//       //Add polygon LAYER
+//       map.addLayer({
+//         'id': 'Existing Bus Route 194',
+//         'type': 'line',
+//         'source': 'Existing Bus Route 194',
+//         'layout': {
+//           'line-join': 'round',
+//           'line-cap': 'round'
+//         },
+//         'paint': {
+//           'line-color': 'rgba(0, 250, 180, 1)',
+//           'line-width': 3
+//         }
+//       });
+//     });
 
 // <!--Other LINES LAYER-- >
       map.on('load', function() {
@@ -333,14 +333,14 @@ fieldset {
             'line-cap': 'round'
           },
           'paint': {
-            // 'line-color': '#000',
-            'line-width': 3,
+            'line-color': 'rgba(64,64,64,1)',
+            'line-width': 2,
             'line-opacity': 1,
             // 'line-outline-color': 'rgba(0, 0, 0, 1)'
-            'line-color': {
-              'property': 'color',
-              'type': 'identity'
-            },
+            // 'line-color': {
+            //   'property': 'color',
+            //   'type': 'identity'
+            // },
             'line-offset': {
               'property': 'Route_Num',
               'type': 'categorical',
@@ -353,7 +353,31 @@ fieldset {
           }
         });
       });
-// <!--Existing Bus Routes-- >
+
+
+// <!--RiverdaleBRT_Phase2-- >
+          map.on('load', function() {
+            map.addSource('Riverdale BRT 2', {
+              'type': 'geojson',
+              'data': 'data/RiverdaleBRT_Phase2.geojson'
+            });
+
+            //Add polygon LAYER
+            map.addLayer({
+              'id': 'Riverdale BRT Phase 2',
+              'type': 'line',
+              'source': 'Riverdale BRT 2',
+              'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+              },
+              'paint': {
+                'line-color': 'rgba(3, 93, 130, 1)',
+                'line-width': 4
+              }
+            });
+          });
+// <!--RiverdaleBRT_Phase1-- >
           map.on('load', function() {
             map.addSource('Riverdale BRT 1', {
               'type': 'geojson',
@@ -371,7 +395,7 @@ fieldset {
               },
               'paint': {
                 'line-color': 'rgba(80, 200, 251, 1)',
-                'line-width': 3
+                'line-width': 4
               }
             });
           });
@@ -485,7 +509,7 @@ fieldset {
     map.addControl(new mapboxgl.FullscreenControl());
 
     // enumerate ids of the layers
-    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Existing Bus Route 194', 'Riverdale BRT Phase 1', 'More layers coming soon'];
+    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Riverdale BRT Phase 1', 'Riverdale BRT Phase 2', 'More layers coming soon'];
 
 
 // set up the corresponding toggle button for each layer
