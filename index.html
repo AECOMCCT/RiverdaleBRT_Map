@@ -333,7 +333,7 @@ fieldset {
             'line-cap': 'round'
           },
           'paint': {
-            'line-color': 'rgba(64,64,64,1)',
+            'line-color': 'rgba(134,134,134,0.8)',
             'line-width': 2,
             'line-opacity': 1,
             // 'line-outline-color': 'rgba(0, 0, 0, 1)'
@@ -402,16 +402,16 @@ fieldset {
 
 // <!--POINTS LAYERS-- >
     map.on('load', function() {
-      map.addSource('points', {
+      map.addSource('17 Stations', {
         'type': 'geojson',
-        'data': ''
+        'data': 'data/Riverdale_Stations_17.geojson'
       });
 
       //Add Lines LAYER
       map.addLayer({
-        'id': 'Supportive Infrastructure Point Projects',
+        'id': 'Riverdale Staions',
         'type': 'circle',
-        'source': 'points',
+        'source': '17 Stations',
         'layout': {
           // 'line-join': 'round',
           // 'line-cap': 'round'
@@ -509,7 +509,7 @@ fieldset {
     map.addControl(new mapboxgl.FullscreenControl());
 
     // enumerate ids of the layers
-    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Riverdale BRT Phase 1', 'Riverdale BRT Phase 2', 'More layers coming soon'];
+    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Riverdale BRT Phase 1', 'Riverdale BRT Phase 2', 'Riverdale Staions', 'More layers coming soon'];
 
 
 // set up the corresponding toggle button for each layer
