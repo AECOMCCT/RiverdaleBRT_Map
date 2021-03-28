@@ -333,14 +333,14 @@ fieldset {
             'line-cap': 'round'
           },
           'paint': {
-            'line-color': '#000',
+            // 'line-color': '#000',
             'line-width': 3,
             'line-opacity': 1,
             // 'line-outline-color': 'rgba(0, 0, 0, 1)'
-            // 'line-color': {
-            //   'property': 'color',
-            //   'type': 'identity'
-            // },
+            'line-color': {
+              'property': 'color',
+              'type': 'identity'
+            },
             'line-offset': {
               'property': 'Route_Num',
               'type': 'categorical',
@@ -353,8 +353,30 @@ fieldset {
           }
         });
       });
+// <!--Existing Bus Routes-- >
+          map.on('load', function() {
+            map.addSource('Riverdale BRT 1', {
+              'type': 'geojson',
+              'data': 'data/RiverdaleBRT_Phase1.geojson'
+            });
 
-// <!--POINTS LAYER-- >
+            //Add polygon LAYER
+            map.addLayer({
+              'id': 'Riverdale BRT Phase 1',
+              'type': 'line',
+              'source': 'Riverdale BRT 1',
+              'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+              },
+              'paint': {
+                'line-color': 'rgba(80, 200, 251, 1)',
+                'line-width': 3
+              }
+            });
+          });
+
+// <!--POINTS LAYERS-- >
     map.on('load', function() {
       map.addSource('points', {
         'type': 'geojson',
@@ -463,7 +485,7 @@ fieldset {
     map.addControl(new mapboxgl.FullscreenControl());
 
     // enumerate ids of the layers
-    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Existing Bus Route 194', 'More layers coming soon'];
+    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Existing Bus Route 194', 'Riverdale BRT Phase 1', 'More layers coming soon'];
 
 
 // set up the corresponding toggle button for each layer
