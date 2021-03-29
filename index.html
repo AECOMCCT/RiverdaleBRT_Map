@@ -315,7 +315,8 @@ fieldset {
             'line-cap': 'round'
           },
           'paint': {
-            'line-color': 'rgba(134,134,134,0.8)',
+            // 'line-color': 'rgba(134,134,134,0.8)',
+            'line-color': ['get', 'Color'],
             'line-width': 2,
             'line-opacity': 1,
             // 'line-outline-color': 'rgba(0, 0, 0, 1)'
@@ -323,15 +324,15 @@ fieldset {
             //   'property': 'color',
             //   'type': 'identity'
             // },
-            'line-offset': {
-              'property': 'Route_Num',
-              'type': 'categorical',
-              stops: [
-                [1, 0],
-                [2, 3],
-                [3, 6]
-              ]
-            }
+            // 'line-offset': {
+            //   'property': 'Color',
+            //   'type': 'categorical',
+            //   stops: [
+            //     [1, 0],
+            //     [2, 3],
+            //     [3, 6]
+            //   ]
+            // }
           }
         });
       });

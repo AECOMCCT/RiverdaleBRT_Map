@@ -6,6 +6,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 192,
+        "Color": "#a6aea9",
         "Length_Mi": 0,
         "Length_FT": 91573.8205241
       },
@@ -234,6 +235,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 191,
+        "Color": "#fde0dd",
         "Length_Mi": 0,
         "Length_FT": 68623.1858655
       },
@@ -402,6 +404,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 193,
+        "Color": "#fcc5c0",
         "Length_Mi": 0,
         "Length_FT": 93574.5505261
       },
@@ -546,6 +549,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 194,
+        "Color": "#fa9fb5",
         "Length_Mi": 0,
         "Length_FT": 126772.372678
       },
@@ -882,6 +886,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 195,
+        "Color": "#f768a1",
         "Length_Mi": 0,
         "Length_FT": 99239.2764046
       },
@@ -1126,6 +1131,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 196,
+        "Color": "#dd3497",
         "Length_Mi": 0,
         "Length_FT": 39277.4385974
       },
@@ -1294,6 +1300,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 197,
+        "Color": "#ae017e",
         "Length_Mi": 0,
         "Length_FT": 76441.5385377
       },
@@ -1506,6 +1513,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 400,
+        "Color": "#7a0177",
         "Length_Mi": 0,
         "Length_FT": 0
       },
@@ -1626,6 +1634,7 @@
       "properties": {
         "Id": 0,
         "Route_Num": 401,
+        "Color": "#49006a",
         "Length_Mi": 0,
         "Length_FT": 0
       },
