@@ -52,8 +52,8 @@
     }
 
     .mapboxgl-popup {
-      max-width: 600px;
-      min-width: 350px;
+      max-width: 300px;
+      min-width: 200px;
       max-height: 300px;
       font: 14px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
       overflow-y: scroll;
@@ -61,17 +61,20 @@
       overflow: scroll;
       z-index: 10;
       border: 0px solid rgba(0, 79, 150, 0.9);
+      margin: 19px 20px;
     }
-
+    h2 {
+      color: "#088ccc !important";
+    }
     .mapboxgl-popup-content {
       overflow: scroll;
-      background-color: rgba(250, 250, 250, 0.9);
+      background-color: rgba(250, 250, 250, 0.8);
       font: 14px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
       color: #2f3234;
 
     }
     a {
-      color: #ee404a;
+      color: #f47521;
     }
     .leftPop {
       float: left;
@@ -92,7 +95,7 @@
       position: relative;
       z-index: 3;
       top: 0px;
-      left: 20px;
+      left: 25px;
       bottom: 20px;
       border-radius: 3px;
       width: 75%;
@@ -174,9 +177,15 @@
       flex-direction: column;
       justify-content: flex-start;
     }
-fieldset {
-  border-width: 0px;
+    fieldset {
+      border-width: 0px;
+    }
+    /* Rounded border */
+hr.rounded {
+  border-top: 8px solid #bbb;
+  border-radius: 5px;
 }
+
   </style>
   <!-- <div class="nav">
     <h2>ATL Disrticts Map</h2>
@@ -403,11 +412,11 @@ fieldset {
           // 'line-cap': 'round'
         },
         'paint': {
-          'circle-color': 'rgba(253, 183, 20, .9)',
+          'circle-color': 'rgba(253, 183, 20, .8)',
           'circle-stroke-color': 'rgba(253, 183, 20, 1)',
           'circle-stroke-opacity': 1,
           'circle-stroke-width': 2,
-          'circle-radius': 7
+          'circle-radius': 7.5
         }
       });
     });
@@ -430,11 +439,11 @@ fieldset {
           // 'line-cap': 'round'
         },
         'paint': {
-          'circle-color': 'rgba(250, 250, 250, .9)',
+          'circle-color': 'rgba(75, 75, 75, .8)',
           'circle-stroke-color': 'rgba(250, 250, 250, 1)',
           'circle-stroke-opacity': 1,
           'circle-stroke-width': 2,
-          'circle-radius': 7.5
+          'circle-radius': 9
         }
       });
     });
@@ -480,105 +489,84 @@ fieldset {
 
 
 
-// ********** PopUps for POINTS Layer **********
-      map.on('click', 'Supportive Infrastructure Point Projects', function(e) {
+// ********** PopUps for POINTS Stations Layer **********
+      map.on('click', 'Riverdale Stations', function(e) {
             new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(
-              "<strong>Project Sponsor: </strong>"+ e.features[0].properties.Project_Sponsor + "<br />"
-              + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
-              + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
-              + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
-              + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
-              + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
-              + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+              "<h2>Riverdale Station</h2>"+ "<hr />"
+              +"<strong>STOP NAME: </strong>" + "<br />"
+              + e.features[0].properties.stop_name + "<br />")
             .addTo(map);
             // listingEl.appendChild(item);
 
          });
 
-// ********** PopUps for POLYGON Layer **********
-   map.on('click', 'Large Area Projects', function(e) {
+// ********** PopUps for POINTS Mobility Hubs Layer **********
+   map.on('click', 'Riverdale Major Stations', function(e) {
          new mapboxgl.Popup()
          .setLngLat(e.lngLat)
          .setHTML(
-           "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
-           + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
-           + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
-           + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
-           + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
-           + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
-           + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+           "<h2>Riverdale Mobility Hub</h2>"+ "<hr />"
+           + "<strong>MOBILITY HUB NAME: </strong>"+ "<br />"
+           + e.features[0].properties.STATION + "<br />")
          .addTo(map);
          // listingEl.appendChild(item);
 
       });
 
-//********* Popups for Supportive Infra Lines Layer ******
+//********* Popups for Riverdale Phase 1 Lines Layer ******
 
-    map.on('click', 'Supportive Infrastructure Corridor Projects', function(e) {
+    map.on('click', 'Riverdale BRT Phase 1', function(e) {
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
-          "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
-          + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
-          + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
-          + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
-          + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
-          + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
-          + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+          "<h2>RIVERDALE BRT PHASE 1</h2>"+ "<hr />"
+          + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />"
+          + "<strong>Miles: </strong>" + e.features[0].properties.mi + "<br /> "
+          + "<strong>Hours per Year: </strong>" + e.features[0].properties.hours_year + "<br /> "
+          + "<strong>Cost per Year: </strong>" +" "+"$"+ e.features[0].properties.cost_year + "<br /> "
+          + '<strong><a href="' + e.features[0].properties.url + ' + "target="_blank""" >' + "REMIX Link" + '</a></strong>')
         .addTo(map);
         // listingEl.appendChild(item);
 
      });
 
-//********* Popups for Supportive Infra Lines Layer ******
+//********* Popups for Riverdale Phase 2 Lines Layer ******
 
-    map.on('click', 'Local Service Projects', function(e) {
+    map.on('click', 'Riverdale BRT Phase 2', function(e) {
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
-        "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
-        + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
-        + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
-        + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
-        + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
-        + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
-        + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+        "<h2>RIVERDALE BRT PHASE 2</h2>" + "<hr />"
+        + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />"
+        + "<strong>Miles: </strong>" + e.features[0].properties.mi + "<br /> "
+        + "<strong>Hours per Year: </strong>" + e.features[0].properties.hours_year + "<br /> "
+        + "<strong>Cost per Year: </strong>" +" "+"$"+ e.features[0].properties.cost_year + "<br /> "
+        + '<strong><a href="' + e.features[0].properties.url + ' + "target="_blank""" >' + "REMIX Link" + '</a></strong>')
         .addTo(map);
         // listingEl.appendChild(item);
       });
 
-//********* Popups for Rail Lines Layer ******
+//********* Popups for Existing Clayton Bus Routes Layer ******
 
-    map.on('click', 'High Capacity Service Projects', function(e) {
+    map.on('click', 'Existing Clayton Bus Routes', function(e) {
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
-        "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
-        + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
-        + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
-        + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
-        + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
-        + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
-        + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+        "<strong>Existing Clayton Bus Route </strong>"+ "<hr />"
+        +"<strong>Route Number: </strong>"+ " " + e.features[0].properties.Route_Num + "<br />")
         .addTo(map);
         // listingEl.appendChild(item);
       });
 
-//********* Popups for Rail Lines Layer ******
+//********* Popups Clayton Commuter Rail Layer ******
 
-    map.on('click', 'Other Line Projects', function(e) {
+    map.on('click', 'Clayton Commuter Rail', function(e) {
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
-        "<strong>Project Sponsor: </strong>"+ " " + e.features[0].properties.Project_Sponsor + "<br />"
-        + "<strong>Project ID: </strong>" + e.features[0].properties.Project_ID + "<br /> "
-        + "<strong>Project Name: </strong>" + e.features[0].properties.Project_Name + "<br /> "
-        + "<strong>Project Type: </strong>" + e.features[0].properties.Project_Type + "<br /> "
-        + "<strong>Project Mode: </strong>" + e.features[0].properties.Mode + "<br />"
-        + "<strong>Project Quadrant: </strong>" + e.features[0].properties.Quadrant + "<br />"
-        + '<strong><a href="' + e.features[0].properties.URL + ' + "target="_blank""" >' + "Project Fact Sheet" + '</a></strong>')
+        "<strong>Commuter Rail</strong>" )
         .addTo(map);
         // listingEl.appendChild(item);
       });
