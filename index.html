@@ -251,7 +251,7 @@ hr.rounded {
         },
         'paint': {
           'line-color': 'rgba(251, 178, 23, 1)',
-          'line-width': 2
+          'line-width': 2.5
         }
       });
     });
@@ -275,7 +275,7 @@ hr.rounded {
         },
         'paint': {
           'line-color': 'rgba(255, 0, 0, 1)',
-          'line-width': 2
+          'line-width': 2.5
         }
       });
     });
@@ -300,7 +300,7 @@ hr.rounded {
       },
       'paint': {
         'line-color': 'rgba(55, 180, 180, 1)',
-        'line-width': 2
+        'line-width': 3
       }
     });
   });
@@ -326,7 +326,7 @@ hr.rounded {
           'paint': {
             // 'line-color': 'rgba(134,134,134,0.8)',
             'line-color': ['get', 'Color'],
-            'line-width': 2,
+            'line-width': 2.5,
             'line-opacity': 1,
             // 'line-outline-color': 'rgba(0, 0, 0, 1)'
             // 'line-color': {
@@ -366,7 +366,7 @@ hr.rounded {
               },
               'paint': {
                 'line-color': 'rgba(3, 93, 130, 1)',
-                'line-width': 4
+                'line-width': 4.5
               }
             });
           });
@@ -389,7 +389,7 @@ hr.rounded {
               },
               'paint': {
                 'line-color': 'rgba(80, 200, 251, 1)',
-                'line-width': 4
+                'line-width': 4.5
               }
             });
           });
@@ -491,6 +491,7 @@ hr.rounded {
 
 // ********** PopUps for POINTS Stations Layer **********
       map.on('click', 'Riverdale Stations', function(e) {
+        map.getCanvas().style.cursor = 'pointer';
             new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(
@@ -504,6 +505,7 @@ hr.rounded {
 
 // ********** PopUps for POINTS Mobility Hubs Layer **********
    map.on('click', 'Riverdale Major Stations', function(e) {
+     map.getCanvas().style.cursor = 'pointer';
          new mapboxgl.Popup()
          .setLngLat(e.lngLat)
          .setHTML(
@@ -518,6 +520,7 @@ hr.rounded {
 //********* Popups for Riverdale Phase 1 Lines Layer ******
 
     map.on('click', 'Riverdale BRT Phase 1', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
@@ -535,6 +538,7 @@ hr.rounded {
 //********* Popups for Riverdale Phase 2 Lines Layer ******
 
     map.on('click', 'Riverdale BRT Phase 2', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
@@ -551,6 +555,7 @@ hr.rounded {
 //********* Popups for Existing Clayton Bus Routes Layer ******
 
     map.on('click', 'Existing Clayton Bus Routes', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
@@ -563,6 +568,7 @@ hr.rounded {
 //********* Popups Clayton Commuter Rail Layer ******
 
     map.on('click', 'Clayton Commuter Rail', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
