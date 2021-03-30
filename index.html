@@ -284,16 +284,16 @@ hr.rounded {
 
 // <!--Other LINES LAYER-- >
       map.on('load', function() {
-        map.addSource('Existing Clayton Bus Routes', {
+        map.addSource('Proposed Clayton Bus Routes', {
           'type': 'geojson',
           'data': 'data/ClaytonBusRoutes_Existing.geojson'
         });
 
         //Add Lines LAYER
         map.addLayer({
-          'id': 'Existing Clayton Bus Routes',
+          'id': 'Proposed Clayton Bus Routes',
           'type': 'line',
-          'source': 'Existing Clayton Bus Routes',
+          'source': 'Proposed Clayton Bus Routes',
           'layout': {
             'visibility': 'none',
             'line-join': 'round',
@@ -304,20 +304,6 @@ hr.rounded {
             'line-color': ['get', 'Color'],
             'line-width': 2.5,
             'line-opacity': 1,
-            // 'line-outline-color': 'rgba(0, 0, 0, 1)'
-            // 'line-color': {
-            //   'property': 'color',
-            //   'type': 'identity'
-            // },
-            // 'line-offset': {
-            //   'property': 'Color',
-            //   'type': 'categorical',
-            //   stops: [
-            //     [1, 0],
-            //     [2, 3],
-            //     [3, 6]
-            //   ]
-            // }
           }
         });
       });
@@ -437,7 +423,7 @@ hr.rounded {
     map.addControl(new mapboxgl.FullscreenControl());
 
     // enumerate ids of the layers
-    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Proposed Clayton Bus Routes','Clayton BRT Phase 1', 'Clayton Phase 1 Stations', 'Clayton BRT Phase 2', 'Clayton Phase 2 Stations'];
+    var toggleableLayerIds = ['Clayton BRT Phase 1', 'Clayton Phase 1 Stations', 'Clayton BRT Phase 2', 'Clayton Phase 2 Stations', 'Proposed Clayton Bus Routes','Existing MARTA Red Line', 'Existing MARTA Gold Line'];
 
 
 // set up the corresponding toggle button for each layer
@@ -449,6 +435,10 @@ hr.rounded {
       link.onclick=function (e) {
         var clickedLayer=this.textContent;
         e.preventDefault(); e.stopPropagation();
+
+
+
+
 
 
         var visibility=map.getLayoutProperty(clickedLayer, 'visibility' );
