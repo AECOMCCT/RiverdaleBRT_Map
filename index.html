@@ -389,6 +389,7 @@ hr.rounded {
         'type': 'geojson',
         'data': 'data/Riverdale_Phase2 Stations.geojson'
       });
+
 //Add Phase 2 POINTS LAYER
       map.addLayer({
         'id': 'Clayton Phase 2 Stations',
@@ -425,32 +426,67 @@ hr.rounded {
     // enumerate ids of the layers
     var toggleableLayerIds = ['Clayton BRT Phase 1', 'Clayton Phase 1 Stations', 'Clayton BRT Phase 2', 'Clayton Phase 2 Stations', 'Proposed Clayton Bus Routes','Existing MARTA Red Line', 'Existing MARTA Gold Line'];
 
-
-// set up the corresponding toggle button for each layer
-    for (var i = 0; i < toggleableLayerIds.length; i++) {
-      var id=toggleableLayerIds[i];
-      var link=document.createElement('a'); link.href='#' ; link.className='active' ;
-      link.textContent=id;
-
-      link.onclick=function (e) {
-        var clickedLayer=this.textContent;
-        e.preventDefault(); e.stopPropagation();
+    toggleLayer(['Clayton BRT Phase 1', 'Clayton Phase 1 Stations'], 'Clayton BRT Phase 1', "visible");
+    toggleLayer(['Clayton BRT Phase 2', 'Clayton Phase 2 Stations'], 'Clayton BRT Phase 2', "visible");
+    toggleLayer(['Proposed Clayton Bus Routes'], 'Proposed Clayton Bus Routes');
+    toggleLayer(['Existing MARTA Red Line'], 'Existing MARTA Red Line');
+    toggleLayer(['Existing MARTA Gold Line'], 'Existing MARTA Gold Line');
 
 
+//     map.on('load', function() {
+//       if(map.getLayoutProperty(id, 'visibility') === 'visible')
+//         {
+//          link.className = 'active';
+//         }
+//       });
+// // set up the corresponding toggle button for each layer
 
+//     for (var i = 0; i < toggleableLayerIds.length; i++) {
+//       var id=toggleableLayerIds[i];
+//       var link=document.createElement('a'); link.href='#' ; link.className= 'visibility';
+//       link.textContent=id;
+//
+//       link.onclick=function (e) {
+//         var clickedLayer=this.textContent;
+//         e.preventDefault(); e.stopPropagation();
+//
+//
+//
+//         var visibility=map.getLayoutProperty(clickedLayer, 'visibility' );
+// // toggle layer visibility by changing the layout object's visibility property
+//         if (visibility==='visible' ) {
+//           map.setLayoutProperty(clickedLayer, 'visibility' , 'none' );
+//             this.className='' ; }
+//             else {
+//               this.className='active' ;
+//               map.setLayoutProperty(clickedLayer, 'visibility' , 'visible');
+//             } };
+//             var layers=document.getElementById('menu'); layers.appendChild(link); }
 
+/// Alt.
+function toggleLayer(id, name , show) {
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = show === "visible" ?'active':"";
+    link.textContent = name;
+    link.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        for (layers in id){
+            var visibility = map.getLayoutProperty(id[layers], 'visibility');
 
-
-        var visibility=map.getLayoutProperty(clickedLayer, 'visibility' );
-// toggle layer visibility by changing the layout object's visibility property
-        if (visibility==='visible' ) {
-          map.setLayoutProperty(clickedLayer, 'visibility' , 'none' );
-            this.className='' ; }
-            else {
-              this.className='active' ;
-              map.setLayoutProperty(clickedLayer, 'visibility' , 'visible');
-            } };
-            var layers=document.getElementById('menu'); layers.appendChild(link); }
+            if (visibility === 'visible') {
+                map.setLayoutProperty(id[layers], 'visibility', 'none');
+                this.className = '';
+            } else {
+                this.className = 'active';
+                map.setLayoutProperty(id[layers], 'visibility', 'visible');
+            }
+         }
+    };
+    var layers = document.getElementById('menu');
+    layers.appendChild(link);
+}
 
 
 
