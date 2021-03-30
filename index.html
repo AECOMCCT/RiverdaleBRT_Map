@@ -68,7 +68,7 @@
     }
     .mapboxgl-popup-content {
       overflow: scroll;
-      background-color: rgba(250, 250, 250, 0.8);
+      background-color: rgba(250, 250, 250, 1);
       font: 14px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
       color: #2f3234;
 
@@ -245,7 +245,7 @@ hr.rounded {
         'type': 'line',
         'source': 'Existing MARTA Gold Line',
         'layout': {
-          'visibility': 'visible',
+          'visibility': 'none',
           'line-join': 'round',
           'line-cap': 'round'
         },
@@ -269,7 +269,7 @@ hr.rounded {
         'type': 'line',
         'source': 'Existing MARTA Red Line',
         'layout': {
-          'visibility': 'visible',
+          'visibility': 'none',
           'line-join': 'round',
           'line-cap': 'round'
         },
@@ -280,30 +280,6 @@ hr.rounded {
       });
     });
 
-
-// <!--Clayton Commuter Rail LAYER-- >
-  map.on('load', function() {
-    map.addSource('Clayton Commuter Rail', {
-      'type': 'geojson',
-      'data': 'data/ClaytonCommuterRail.geojson'
-    });
-
-    //Add polygon LAYER
-    map.addLayer({
-      'id': 'Clayton Commuter Rail',
-      'type': 'line',
-      'source': 'Clayton Commuter Rail',
-      'layout': {
-        'visibility': 'visible',
-        'line-join': 'round',
-        'line-cap': 'round'
-      },
-      'paint': {
-        'line-color': 'rgba(55, 180, 180, 1)',
-        'line-width': 3
-      }
-    });
-  });
 
 
 // <!--Other LINES LAYER-- >
@@ -349,16 +325,16 @@ hr.rounded {
 
 // <!--RiverdaleBRT_Phase2-- >
           map.on('load', function() {
-            map.addSource('Riverdale BRT 2', {
+            map.addSource('Clayton BRT Phase 2', {
               'type': 'geojson',
               'data': 'data/RiverdaleBRT_Phase2.geojson'
             });
 
             //Add polygon LAYER
             map.addLayer({
-              'id': 'Riverdale BRT Phase 2',
+              'id': 'Clayton BRT Phase 2',
               'type': 'line',
-              'source': 'Riverdale BRT 2',
+              'source': 'Clayton BRT Phase 2',
               'layout': {
                 'visibility': 'visible',
                 'line-join': 'round',
@@ -372,16 +348,16 @@ hr.rounded {
           });
 // <!--RiverdaleBRT_Phase1-- >
           map.on('load', function() {
-            map.addSource('Riverdale BRT 1', {
+            map.addSource('Clayton BRT Phase 1', {
               'type': 'geojson',
               'data': 'data/RiverdaleBRT_Phase1.geojson'
             });
 
             //Add polygon LAYER
             map.addLayer({
-              'id': 'Riverdale BRT Phase 1',
+              'id': 'Clayton BRT Phase 1',
               'type': 'line',
-              'source': 'Riverdale BRT 1',
+              'source': 'Clayton BRT Phase 1',
               'layout': {
                 'visibility': 'visible',
                 'line-join': 'round',
@@ -396,16 +372,16 @@ hr.rounded {
 
 // <!--POINTS LAYERS-- >
     map.on('load', function() {
-      map.addSource('17 Stations', {
+      map.addSource('Phase 1 Stations', {
         'type': 'geojson',
-        'data': 'data/Riverdale_Stations_17.geojson'
+        'data': 'data/Riverdale_Phase1 Stations_v4.geojson'
       });
 
-//Add POINTS LAYER
+//Add Phase 1 POINTS LAYER
       map.addLayer({
-        'id': 'Riverdale Stations',
+        'id': 'Clayton Phase 1 Stations',
         'type': 'circle',
-        'source': '17 Stations',
+        'source': 'Phase 1 Stations',
         'layout': {
           'visibility': 'visible'
           // 'line-join': 'round',
@@ -413,7 +389,7 @@ hr.rounded {
         },
         'paint': {
           'circle-color': 'rgba(253, 183, 20, .8)',
-          'circle-stroke-color': 'rgba(253, 183, 20, 1)',
+          'circle-stroke-color': 'rgba(250, 250, 250, 1)',
           'circle-stroke-opacity': 1,
           'circle-stroke-width': 2,
           'circle-radius': 7.5
@@ -423,27 +399,26 @@ hr.rounded {
 
 // <!--POINTS LAYERS-- >
     map.on('load', function() {
-      map.addSource('Riverdale Major Stations', {
+      map.addSource('Phase 2 Stations', {
         'type': 'geojson',
-        'data': 'data/RiverdaleBRT_MajorStations.geojson'
+        'data': 'data/Riverdale_Phase2 Stations.geojson'
       });
-
-//Add POINTS LAYER
+//Add Phase 2 POINTS LAYER
       map.addLayer({
-        'id': 'Riverdale Major Stations',
+        'id': 'Clayton Phase 2 Stations',
         'type': 'circle',
-        'source': 'Riverdale Major Stations',
+        'source': 'Phase 2 Stations',
         'layout': {
           'visibility': 'visible'
           // 'line-join': 'round',
           // 'line-cap': 'round'
         },
         'paint': {
-          'circle-color': 'rgba(75, 75, 75, .8)',
+          'circle-color': 'rgba(255,0,255 , 0.8)',
           'circle-stroke-color': 'rgba(250, 250, 250, 1)',
           'circle-stroke-opacity': 1,
           'circle-stroke-width': 2,
-          'circle-radius': 9
+          'circle-radius': 7.5
         }
       });
     });
@@ -462,7 +437,7 @@ hr.rounded {
     map.addControl(new mapboxgl.FullscreenControl());
 
     // enumerate ids of the layers
-    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Clayton Commuter Rail', 'Existing Clayton Bus Routes','Riverdale BRT Phase 1', 'Riverdale BRT Phase 2', 'Riverdale Stations', 'Riverdale Major Stations','More layers coming soon'];
+    var toggleableLayerIds = [ 'Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Proposed Clayton Bus Routes','Clayton BRT Phase 1', 'Clayton Phase 1 Stations', 'Clayton BRT Phase 2', 'Clayton Phase 2 Stations'];
 
 
 // set up the corresponding toggle button for each layer
@@ -489,13 +464,13 @@ hr.rounded {
 
 
 
-// ********** PopUps for POINTS Stations Layer **********
-      map.on('click', 'Riverdale Stations', function(e) {
+// ********** PopUps for Phase 1 POINTS Stations Layer **********
+      map.on('click', 'Clayton Phase 1 Stations', function(e) {
         map.getCanvas().style.cursor = 'pointer';
             new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(
-              "<h2>Riverdale Station</h2>"+ "<hr />"
+              "<h2>Clayton BRT Phase 1 Station</h2>"+ "<hr />"
               +"<strong>STOP NAME: </strong>" + "<br />"
               + e.features[0].properties.stop_name + "<br />")
             .addTo(map);
@@ -503,15 +478,15 @@ hr.rounded {
 
          });
 
-// ********** PopUps for POINTS Mobility Hubs Layer **********
-   map.on('click', 'Riverdale Major Stations', function(e) {
+// ********** PopUps for Phase 2 POINTS Stations Layer **********
+   map.on('click', 'Clayton Phase 2 Stations', function(e) {
      map.getCanvas().style.cursor = 'pointer';
          new mapboxgl.Popup()
          .setLngLat(e.lngLat)
          .setHTML(
-           "<h2>Riverdale Mobility Hub</h2>"+ "<hr />"
-           + "<strong>MOBILITY HUB NAME: </strong>"+ "<br />"
-           + e.features[0].properties.STATION + "<br />")
+           "<h2>Clayton BRT Phase 2 Station</h2>"+ "<hr />"
+           + "<strong>STOP NAME: </strong>"+ "<br />"
+           + e.features[0].properties.stop_name + "<br />")
          .addTo(map);
          // listingEl.appendChild(item);
 
@@ -519,17 +494,13 @@ hr.rounded {
 
 //********* Popups for Riverdale Phase 1 Lines Layer ******
 
-    map.on('click', 'Riverdale BRT Phase 1', function(e) {
+    map.on('click', 'Clayton BRT Phase 1', function(e) {
       map.getCanvas().style.cursor = 'pointer';
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
-          "<h2>RIVERDALE BRT PHASE 1</h2>"+ "<hr />"
-          + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />"
-          + "<strong>Miles: </strong>" + e.features[0].properties.mi + "<br /> "
-          + "<strong>Hours per Year: </strong>" + e.features[0].properties.hours_year + "<br /> "
-          + "<strong>Cost per Year: </strong>" +" "+"$"+ e.features[0].properties.cost_year + "<br /> "
-          + '<strong><a href="' + e.features[0].properties.url + ' + "target="_blank""" >' + "REMIX Link" + '</a></strong>')
+          "<h2>Clayton BRT PHASE 1</h2>"+ "<hr />"
+          + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />")
         .addTo(map);
         // listingEl.appendChild(item);
 
@@ -537,47 +508,29 @@ hr.rounded {
 
 //********* Popups for Riverdale Phase 2 Lines Layer ******
 
-    map.on('click', 'Riverdale BRT Phase 2', function(e) {
+    map.on('click', 'Clayton BRT Phase 2', function(e) {
       map.getCanvas().style.cursor = 'pointer';
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
-        "<h2>RIVERDALE BRT PHASE 2</h2>" + "<hr />"
-        + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />"
-        + "<strong>Miles: </strong>" + e.features[0].properties.mi + "<br /> "
-        + "<strong>Hours per Year: </strong>" + e.features[0].properties.hours_year + "<br /> "
-        + "<strong>Cost per Year: </strong>" +" "+"$"+ e.features[0].properties.cost_year + "<br /> "
-        + '<strong><a href="' + e.features[0].properties.url + ' + "target="_blank""" >' + "REMIX Link" + '</a></strong>')
+        "<h2>CLAYTON BRT PHASE 2</h2>" + "<hr />"
+        + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />")
         .addTo(map);
         // listingEl.appendChild(item);
       });
 
-//********* Popups for Existing Clayton Bus Routes Layer ******
+//********* Popups for Proposed Clayton Bus Routes Layer ******
 
-    map.on('click', 'Existing Clayton Bus Routes', function(e) {
+    map.on('click', 'Proposed Clayton Bus Routes', function(e) {
       map.getCanvas().style.cursor = 'pointer';
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
-        "<strong>Existing Clayton Bus Route </strong>"+ "<hr />"
+        "<strong>Proposed Clayton Bus Route </strong>"+ "<hr />"
         +"<strong>Route Number: </strong>"+ " " + e.features[0].properties.Route_Num + "<br />")
         .addTo(map);
         // listingEl.appendChild(item);
       });
-
-//********* Popups Clayton Commuter Rail Layer ******
-
-    map.on('click', 'Clayton Commuter Rail', function(e) {
-      map.getCanvas().style.cursor = 'pointer';
-        new mapboxgl.Popup()
-        .setLngLat(e.lngLat)
-        .setHTML(
-        "<strong>Commuter Rail</strong>" )
-        .addTo(map);
-        // listingEl.appendChild(item);
-      });
-
-
 
   </script>
 
