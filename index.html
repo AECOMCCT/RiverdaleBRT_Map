@@ -56,9 +56,6 @@
       min-width: 200px;
       max-height: 300px;
       font: 14px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
-      /* overflow-y: scroll;
-      overflow-x: scroll;
-      overflow: scroll; */
       z-index: 10;
       border: 0px solid rgba(0, 79, 150, 0.9);
       margin: 19px 20px;
@@ -518,9 +515,12 @@ function toggleLayer(id, name , show) {
       });
 
 //********* Popups for Riverdale Phase 1 Lines Layer ******
-
-    map.on('click', 'Clayton BRT Phase 1', function(e) {
+      map.on('mouseenter', 'Clayton BRT Phase 1', function(e) {
       map.getCanvas().style.cursor = 'pointer';
+
+      // Single out the first found feature.
+        var feature = e.features[0];
+
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
         .setHTML(
@@ -528,25 +528,29 @@ function toggleLayer(id, name , show) {
           + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />")
         .addTo(map);
         // listingEl.appendChild(item);
-
      });
+     map.on('mouseleave', 'Clayton BRT Phase 1', function() {
+       map.getCanvas().style.cursor = '';
+        popup.remove();
+     });
+
 
 //********* Popups for Riverdale Phase 2 Lines Layer ******
 
-    map.on('click', 'Clayton BRT Phase 2', function(e) {
-      map.getCanvas().style.cursor = 'pointer';
-        new mapboxgl.Popup()
-        .setLngLat(e.lngLat)
-        .setHTML(
-        "<h2>CLAYTON BRT PHASE 2</h2>" + "<hr />"
-        + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />")
-        .addTo(map);
-        // listingEl.appendChild(item);
-      });
+    // map.on('click', 'Clayton BRT Phase 2', function(e) {
+    //   map.getCanvas().style.cursor = 'pointer';
+    //     new mapboxgl.Popup()
+    //     .setLngLat(e.lngLat)
+    //     .setHTML(
+    //     "<h2>CLAYTON BRT PHASE 2</h2>" + "<hr />"
+    //     + "<strong>Line Name: </strong>"+ " " + e.features[0].properties.line_name + "<br />")
+    //     .addTo(map);
+    //     // listingEl.appendChild(item);
+    //   });
 
 //********* Popups for Proposed Clayton Bus Routes Layer ******
 
-    map.on('click', 'Proposed Clayton Bus Routes', function(e) {
+    map.on('mouseenter', 'Proposed Clayton Bus Routes', function(e) {
       map.getCanvas().style.cursor = 'pointer';
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
@@ -555,6 +559,10 @@ function toggleLayer(id, name , show) {
         +"<strong>Route Number: </strong>"+ " " + e.features[0].properties.Route_Num + "<br />")
         .addTo(map);
         // listingEl.appendChild(item);
+      });
+      map.on('mouseleave', 'Proposed Clayton Bus Routes', function() {
+        map.getCanvas().style.cursor = '';
+         popup.remove();
       });
 
   </script>
