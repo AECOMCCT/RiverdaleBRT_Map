@@ -248,7 +248,7 @@ hr.rounded {
         },
         'paint': {
           'line-color': 'rgba(251, 178, 23, 1)',
-          'line-width': 2.5
+          'line-width': 3.5
         }
       });
     });
@@ -272,7 +272,7 @@ hr.rounded {
         },
         'paint': {
           'line-color': 'rgba(255, 0, 0, 1)',
-          'line-width': 2.5
+          'line-width': 3.5
         }
       });
     });
@@ -299,7 +299,7 @@ hr.rounded {
           'paint': {
             // 'line-color': 'rgba(134,134,134,0.8)',
             'line-color': ['get', 'Color'],
-            'line-width': 2.5,
+            'line-width': 3.5,
             'line-opacity': 1,
           }
         });
@@ -325,7 +325,7 @@ hr.rounded {
               },
               'paint': {
                 'line-color': 'rgba(3, 93, 130, 1)',
-                'line-width': 4.5
+                'line-width': 5
               }
             });
           });
@@ -348,7 +348,7 @@ hr.rounded {
               },
               'paint': {
                 'line-color': 'rgba(80, 200, 251, 1)',
-                'line-width': 4.5
+                'line-width': 5
               }
             });
           });
@@ -564,6 +564,8 @@ function toggleLayer(id, name , show) {
       //   map.getCanvas().style.cursor = '';
       //    popup.remove();
       // });
+// disable map zoom when using scroll
+  map.scrollZoom.disable();
 
   </script>
 
