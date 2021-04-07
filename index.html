@@ -277,6 +277,53 @@ hr.rounded {
       });
     });
 
+    //<!--MARTA Blue LINE-- >
+    map.on('load', function() {
+      map.addSource('Existing MARTA Blue Line', {
+        'type': 'geojson',
+        'data': 'data/MARTA_BlueLine.geojson'
+      });
+
+      //Add polygon LAYER
+      map.addLayer({
+        'id': 'Existing MARTA Blue Line',
+        'type': 'line',
+        'source': 'Existing MARTA Blue Line',
+        'layout': {
+          'visibility': 'none',
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': 'rgba(10, 118, 180, 1)',
+          'line-width': 3.5
+        }
+      });
+    });
+
+    //<!--MARTA Green LINE-- >
+    map.on('load', function() {
+      map.addSource('Existing MARTA Green Line', {
+        'type': 'geojson',
+        'data': 'data/MARTA_GreenLine.geojson'
+      });
+
+      //Add polygon LAYER
+      map.addLayer({
+        'id': 'Existing MARTA Green Line',
+        'type': 'line',
+        'source': 'Existing MARTA Green Line',
+        'layout': {
+          'visibility': 'none',
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': 'rgba(18, 158, 74, 1)',
+          'line-width': 3.5
+        }
+      });
+    });
 
 
 // <!--Other LINES LAYER-- >
@@ -426,7 +473,7 @@ hr.rounded {
     toggleLayer(['Clayton BRT Phase 1', 'Clayton Phase 1 Stations'], 'Clayton BRT Phase 1', "visible");
     toggleLayer(['Clayton BRT Phase 2', 'Clayton Phase 2 Stations'], 'Clayton BRT Phase 2', "visible");
     toggleLayer(['Proposed Clayton Bus Routes'], 'Proposed Clayton Bus Routes');
-    toggleLayer(['Existing MARTA Red Line', 'Existing MARTA Gold Line'], 'Existing MARTA Rail');
+    toggleLayer(['Existing MARTA Red Line', 'Existing MARTA Gold Line', 'Existing MARTA Green Line', 'Existing MARTA Blue Line'], 'Existing MARTA Rail');
 
 
 //     map.on('load', function() {
